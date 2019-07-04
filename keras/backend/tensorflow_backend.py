@@ -3379,7 +3379,8 @@ def in_train_phase(x, alt, training=None):
             return alt
 
     # else: assume learning phase is a placeholder tensor.
-    x = switch(training, x, alt)
+    # x = switch(training, x, alt)
+    x = training * x + (1.-x)*alt
     if uses_learning_phase:
         x._uses_learning_phase = True
     return x
